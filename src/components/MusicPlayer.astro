@@ -3,17 +3,17 @@
 
 <div
   id="music-player"
-  class="fixed bottom-4 right-4 z-40 glass-dark rounded-full transition-all duration-300"
+  class="fixed bottom-6 right-6 z-[300] glass-crimson rounded-[--radius-lg] shadow-[--shadow-md] transition-all duration-300 w-16 hover:w-[280px] group overflow-hidden"
 >
   <button
     id="music-toggle"
-    class="flex items-center gap-2 px-4 py-2.5 text-white/80 hover:text-white transition-colors"
+    class="flex items-center gap-3 w-full px-4 py-4 text-text hover:text-primary transition-colors"
     aria-label="Reproduir música"
     type="button"
   >
     <svg
       id="icon-play"
-      class="w-4 h-4"
+      class="w-5 h-5 shrink-0"
       fill="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -22,14 +22,19 @@
     </svg>
     <svg
       id="icon-pause"
-      class="w-4 h-4 hidden"
+      class="w-5 h-5 shrink-0 hidden"
       fill="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
     >
       <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
     </svg>
-    <span id="music-label" class="text-xs tracking-wider uppercase hidden sm:inline">Música</span>
+    <span
+      id="music-label"
+      class="text-xs font-semibold tracking-[0.08em] uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+      Música ambiental
+    </span>
   </button>
 
   <audio id="audio-player" loop preload="none">
@@ -51,7 +56,7 @@
       audio.pause();
       iconPlay.classList.remove('hidden');
       iconPause.classList.add('hidden');
-      label.textContent = 'Música';
+      label.textContent = 'Música ambiental';
       toggle.setAttribute('aria-label', 'Reproduir música');
     } else {
       audio.play().catch(() => {});

@@ -4,29 +4,27 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="La Guita Grossa — La Patum de Berga">
   <!-- Hero -->
-  <section class="relative h-screen flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0 bg-guita-dark">
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-guita-dark/40 via-guita-dark/60 to-guita-dark"
-      ></div>
+  <section class="relative min-h-svh flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-bg">
       <!-- Placeholder: reemplazar con imagen hero del client -->
-      <div class="absolute inset-0 bg-[url('/images/hero-placeholder.jpg')] bg-cover bg-center opacity-50"></div>
+      <div class="absolute inset-0 bg-[#2D2D2D]"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-overlay/40 to-bg"></div>
     </div>
 
     <div class="relative z-10 text-center px-4 max-w-3xl">
-      <p class="text-guita-gold text-sm tracking-[0.3em] uppercase mb-6 font-medium">
-        La Patum de Berga
+      <p class="text-primary text-[0.6875rem] font-semibold tracking-[0.08em] uppercase mb-6">
+        Comparsa de La Patum de Berga
       </p>
-      <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-bold leading-tight">
+      <h1 class="text-[clamp(2.5rem,6vw,5rem)] font-bold text-text leading-[1.2]">
         La Guita Grossa
       </h1>
-      <div class="mt-8 h-px w-24 bg-guita-gold/40 mx-auto"></div>
-      <p class="mt-8 text-white/60 text-lg sm:text-xl max-w-xl mx-auto text-balance">
+      <div class="mt-8 h-px w-24 bg-primary/30 mx-auto"></div>
+      <p class="mt-8 text-text-muted text-lg sm:text-xl max-w-xl mx-auto text-balance">
         Patrimoni Immaterial de la Humanitat per la UNESCO
       </p>
       <a
         href="#galeria"
-        class="inline-flex items-center gap-2 mt-12 text-sm text-white/50 hover:text-white transition-colors tracking-widest uppercase"
+        class="inline-flex items-center gap-2 mt-12 px-6 py-3 glass-prominent rounded-[--radius-md] text-sm font-medium text-text hover:text-primary transition-colors tracking-[0.08em] uppercase"
         aria-label="Desplaçar-se a la galeria"
       >
         Descobreix
@@ -38,11 +36,11 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Photo Slider -->
-  <section id="galeria" class="py-20 bg-guita-cream">
+  <section id="galeria" class="py-16 sm:py-24 bg-bg">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <p class="text-guita-red text-sm tracking-[0.2em] uppercase font-medium">Galeria</p>
-        <h2 class="font-display text-3xl sm:text-4xl text-guita-dark mt-3">Moments de foc i festa</h2>
+        <p class="text-primary text-[0.6875rem] font-semibold tracking-[0.08em] uppercase">Galeria</p>
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold text-text mt-3">Moments de foc i festa</h2>
       </div>
 
       <div
@@ -52,11 +50,11 @@ import Layout from '../layouts/Layout.astro';
         tabindex="0"
       >
         {Array.from({ length: 6 }).map((_, i) => (
-          <div class="snap-center shrink-0 first:pl-0 last:pr-0">
-            <div class="w-72 sm:w-80 aspect-[4/5] rounded-lg overflow-hidden bg-guita-dark/5">
+          <div class="snap-start shrink-0">
+            <div class="min-w-[260px] h-[380px] rounded-[--radius-lg] overflow-hidden shadow-[--shadow-md]">
               <!-- Placeholder: reemplazar con fotos del client -->
-              <div class="w-full h-full bg-gradient-to-br from-guita-dark/10 to-guita-dark/5 flex items-center justify-center">
-                <span class="text-guita-dark/20 text-sm">Foto {i + 1}</span>
+              <div class="w-full h-full bg-gradient-to-br from-bg to-[#2D2D2D] flex items-center justify-center">
+                <span class="text-text-muted text-sm">Foto {i + 1}</span>
               </div>
             </div>
           </div>
@@ -65,31 +63,62 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="flex justify-center gap-2 mt-6" aria-hidden="true">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div class="w-1.5 h-1.5 rounded-full bg-guita-dark/20 first:bg-guita-red"></div>
+          <div class:list={['w-2 h-2 rounded-full', i === 0 ? 'bg-primary' : 'bg-border']}></div>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- About Section -->
+  <section class="py-16 sm:py-24 bg-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div class="glass rounded-[--radius-lg] p-8">
+          <p class="text-primary text-[0.6875rem] font-semibold tracking-[0.08em] uppercase mb-4">Sobre la Guita</p>
+          <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold text-text mb-6">
+            Una tradició centenària
+          </h2>
+          <p class="text-text-muted leading-relaxed">
+            La Guita Grossa és una de les comparses més emblemàtiques de La Patum de Berga,
+            festa declarada Patrimoni Immaterial de la Humanitat per la UNESCO l'any 2005.
+            Generació rere generació, els seus integrants mantenen viva la flama d'aquesta
+            tradició ancestral de foc, música i festa.
+          </p>
+          <a
+            href="/historia"
+            class="inline-block mt-6 text-sm font-medium text-primary hover:text-primary-dark transition-colors tracking-[0.08em] uppercase"
+          >
+            Coneix la nostra història →
+          </a>
+        </div>
+        <div class="aspect-[4/3] rounded-[--radius-lg] overflow-hidden shadow-[--shadow-md]">
+          <div class="w-full h-full bg-gradient-to-br from-bg to-[#2D2D2D] flex items-center justify-center">
+            <span class="text-text-muted text-sm">Foto La Patum — pendent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section -->
-  <section class="py-20 bg-guita-dark text-center">
+  <section class="py-16 sm:py-24 bg-bg text-center">
     <div class="mx-auto max-w-2xl px-4">
-      <h2 class="font-display text-3xl sm:text-4xl text-white">Vols saber-ne més?</h2>
-      <p class="mt-4 text-white/50 text-lg">
-        Descobreix la història, els integrants i com contactar amb nosaltres.
+      <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold text-text">Vols saber-ne més?</h2>
+      <p class="mt-4 text-text-muted text-lg">
+        Descobreix els integrants i com contactar amb nosaltres.
       </p>
       <div class="flex flex-wrap justify-center gap-4 mt-8">
         <a
-          href="/historia"
-          class="px-6 py-3 bg-guita-red text-white text-sm tracking-wider uppercase rounded hover:bg-guita-red-light transition-colors"
+          href="/integrants"
+          class="px-6 py-3 bg-primary text-text text-sm font-semibold tracking-[0.08em] uppercase rounded-[--radius-md] hover:bg-primary-dark hover:shadow-[--shadow-glow-red] transition-all"
         >
-          La nostra història
+          Els integrants
         </a>
         <a
           href="/contacte"
-          class="px-6 py-3 border border-white/20 text-white/80 text-sm tracking-wider uppercase rounded hover:border-white/40 hover:text-white transition-colors"
+          class="px-6 py-3 glass rounded-[--radius-md] text-text text-sm font-semibold tracking-[0.08em] uppercase hover:bg-white/12 transition-colors"
         >
-          Contacta&apos;ns
+          Contacta'ns
         </a>
       </div>
     </div>

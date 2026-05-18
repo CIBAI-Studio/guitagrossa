@@ -7,16 +7,16 @@ import Layout from '../layouts/Layout.astro';
   description="Contacta amb La Guita Grossa de La Patum de Berga. Envia'ns un missatge."
 >
   <!-- Header -->
-  <section class="pt-28 pb-16 bg-guita-dark">
+  <section class="pt-28 pb-16 bg-bg">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
-      <p class="text-guita-gold text-sm tracking-[0.2em] uppercase font-medium">Escriu-nos</p>
-      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl text-white mt-3">Contacte</h1>
-      <div class="mt-6 h-px w-16 bg-guita-gold/30 mx-auto"></div>
+      <p class="text-primary text-[0.6875rem] font-semibold tracking-[0.08em] uppercase">Escriu-nos</p>
+      <h1 class="text-[clamp(2.5rem,6vw,5rem)] font-bold text-text mt-3">Contacte</h1>
+      <div class="mt-6 h-px w-16 bg-primary/30 mx-auto"></div>
     </div>
   </section>
 
   <!-- Form -->
-  <section class="py-16 sm:py-20 bg-guita-cream">
+  <section class="py-16 sm:py-24 bg-bg">
     <div class="mx-auto max-w-xl px-4 sm:px-6 lg:px-8">
       <form
         id="contact-form"
@@ -25,7 +25,7 @@ import Layout from '../layouts/Layout.astro';
         class="space-y-6"
       >
         <div>
-          <label for="name" class="block text-sm font-medium text-guita-dark mb-2">
+          <label for="name" class="block text-sm font-medium text-text mb-2">
             Nom
           </label>
           <input
@@ -35,12 +35,12 @@ import Layout from '../layouts/Layout.astro';
             required
             autocomplete="name"
             placeholder="El teu nom"
-            class="w-full px-4 py-3 bg-white border border-guita-dark/10 rounded-lg text-guita-dark placeholder:text-guita-dark/30 focus:outline-none focus:ring-2 focus:ring-guita-red/30 focus:border-guita-red/50 transition-colors"
+            class="w-full px-4 py-3 bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.15)] rounded-[--radius-sm] text-text placeholder:text-text-muted focus:outline-none focus:border-primary focus:shadow-[0_0_0_2px_rgba(196,30,58,0.2)] transition-all"
           />
         </div>
 
         <div>
-          <label for="email" class="block text-sm font-medium text-guita-dark mb-2">
+          <label for="email" class="block text-sm font-medium text-text mb-2">
             Correu electrònic
           </label>
           <input
@@ -50,12 +50,12 @@ import Layout from '../layouts/Layout.astro';
             required
             autocomplete="email"
             placeholder="nom@exemple.cat"
-            class="w-full px-4 py-3 bg-white border border-guita-dark/10 rounded-lg text-guita-dark placeholder:text-guita-dark/30 focus:outline-none focus:ring-2 focus:ring-guita-red/30 focus:border-guita-red/50 transition-colors"
+            class="w-full px-4 py-3 bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.15)] rounded-[--radius-sm] text-text placeholder:text-text-muted focus:outline-none focus:border-primary focus:shadow-[0_0_0_2px_rgba(196,30,58,0.2)] transition-all"
           />
         </div>
 
         <div>
-          <label for="message" class="block text-sm font-medium text-guita-dark mb-2">
+          <label for="message" class="block text-sm font-medium text-text mb-2">
             Missatge
           </label>
           <textarea
@@ -64,28 +64,28 @@ import Layout from '../layouts/Layout.astro';
             required
             rows="5"
             placeholder="Escriu el teu missatge..."
-            class="w-full px-4 py-3 bg-white border border-guita-dark/10 rounded-lg text-guita-dark placeholder:text-guita-dark/30 focus:outline-none focus:ring-2 focus:ring-guita-red/30 focus:border-guita-red/50 transition-colors resize-none"
+            class="w-full px-4 py-3 bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.15)] rounded-[--radius-sm] text-text placeholder:text-text-muted focus:outline-none focus:border-primary focus:shadow-[0_0_0_2px_rgba(196,30,58,0.2)] transition-all resize-none"
           ></textarea>
         </div>
 
         <button
           type="submit"
-          class="w-full px-6 py-3 bg-guita-red text-white text-sm tracking-wider uppercase rounded-lg hover:bg-guita-red-light focus:outline-none focus:ring-2 focus:ring-guita-red/50 focus:ring-offset-2 focus:ring-offset-guita-cream transition-colors"
+          class="w-full px-6 py-3 bg-primary text-text text-sm font-semibold tracking-[0.08em] uppercase rounded-[--radius-sm] hover:bg-primary-dark hover:shadow-[--shadow-glow-red] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-bg transition-all"
         >
-          Enviar missatge
+          Enviar
         </button>
       </form>
 
       <!-- Success message -->
-      <div id="form-success" class="hidden mt-6 p-4 bg-guita-green/10 border border-guita-green/20 rounded-lg text-center">
-        <p class="text-guita-green font-medium">Missatge enviat correctament!</p>
-        <p class="text-guita-green/70 text-sm mt-1">Et respondrem el més aviat possible.</p>
+      <div id="form-success" class="hidden mt-6 p-4 bg-secondary/10 border border-secondary/20 rounded-[--radius-sm] text-center">
+        <p class="text-secondary font-medium">Missatge enviat correctament!</p>
+        <p class="text-secondary/70 text-sm mt-1">Et respondrem el més aviat possible.</p>
       </div>
 
       <!-- Error message -->
-      <div id="form-error" class="hidden mt-6 p-4 bg-guita-red/10 border border-guita-red/20 rounded-lg text-center">
-        <p class="text-guita-red font-medium">Error en enviar el missatge.</p>
-        <p class="text-guita-red/70 text-sm mt-1">Si us plau, torna-ho a provar més tard.</p>
+      <div id="form-error" class="hidden mt-6 p-4 bg-primary/10 border border-primary/20 rounded-[--radius-sm] text-center">
+        <p class="text-primary font-medium">Error en enviar el missatge.</p>
+        <p class="text-primary/70 text-sm mt-1">Si us plau, torna-ho a provar més tard.</p>
       </div>
     </div>
   </section>
