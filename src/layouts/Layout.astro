@@ -8,15 +8,128 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  schemaType?: 'home' | 'historia' | 'integrants' | 'contacte';
 }
 
 const {
   title,
-  description = 'La Guita Grossa — Comparsa de La Patum de Berga. Patrimoni Immaterial de la Humanitat per la UNESCO.',
+  description = 'La Guita Grossa és l\'element més antic de la Patum de Berga, Patrimoni Immaterial de la UNESCO. Descobreix la seva història, la colla i les activitats.',
   ogImage = '/images/og-default.jpg',
+  schemaType,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteURL = 'https://guitagrossa.com';
+
+const schemaOrganization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "La Guita Grossa",
+  "alternateName": "Colla de la Guita Grossa de Berga",
+  "description": "La Guita Grossa és l'element del bestiari de la Patum de Berga documentat des de l'any 1621. És la comparsa més antiga de la festa i la que ha mantingut la forma més arcaica al llarg dels segles. La Patum de Berga és Patrimoni Immaterial de la Humanitat de la UNESCO des del 2005.",
+  "url": siteURL,
+  "logo": {
+    "@type": "ImageObject",
+    "url": `${siteURL}/img/logo-guita-grossa.png`,
+    "width": 400,
+    "height": 400
+  },
+  "image": `${siteURL}/images/og-default.jpg`,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Berga",
+    "postalCode": "08600",
+    "addressRegion": "Berguedà",
+    "addressCountry": "ES"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Berga"
+  },
+  "knowsAbout": [
+    "La Patum de Berga",
+    "Bestiari festiu català",
+    "Patrimoni Immaterial de la Humanitat UNESCO",
+    "Tradicions de Corpus Christi"
+  ],
+  "foundingDate": "1621",
+  "sameAs": [
+    "https://ca.wikipedia.org/wiki/Patum_de_Berga",
+    "https://www.lapatum.cat",
+    "https://ich.unesco.org/en/RL/patum-of-berga-00156"
+  ]
+};
+
+const schemaWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "La Guita Grossa",
+  "url": siteURL,
+  "inLanguage": "ca"
+};
+
+const schemaEvent = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "La Patum de Berga 2026",
+  "description": "La Patum de Berga és una festa popular i tradicional declarada Patrimoni Immaterial de la Humanitat per la UNESCO el 2005. Se celebra cada any a Berga durant la setmana de Corpus Christi. La Guita Grossa és un dels elements participants.",
+  "startDate": "2026-06-03",
+  "endDate": "2026-06-07",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "isAccessibleForFree": true,
+  "inLanguage": "ca",
+  "location": {
+    "@type": "Place",
+    "name": "Plaça de Sant Pere, Berga",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Plaça de Sant Pere",
+      "addressLocality": "Berga",
+      "postalCode": "08600",
+      "addressRegion": "Berguedà",
+      "addressCountry": "ES"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 42.1009,
+      "longitude": 1.8441
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Ajuntament de Berga",
+    "url": "https://www.berga.cat"
+  },
+  "performer": {
+    "@type": "PerformingGroup",
+    "name": "La Guita Grossa",
+    "url": siteURL
+  },
+  "url": "https://www.lapatum.cat",
+  "image": `${siteURL}/images/og-default.jpg`
+};
+
+const getBreadcrumb = (type: string) => {
+  const pages: Record<string, {name: string, path: string}> = {
+    historia: { name: 'Història', path: '/historia' },
+    integrants: { name: 'Integrants', path: '/integrants' },
+    contacte: { name: 'Contacte', path: '/contacte' },
+  };
+  const page = pages[type];
+  if (!page) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inici", "item": siteURL },
+      { "@type": "ListItem", "position": 2, "name": page.name, "item": `${siteURL}${page.path}` }
+    ]
+  };
+};
+
+const breadcrumb = schemaType && schemaType !== 'home' ? getBreadcrumb(schemaType) : null;
+const showEvent = schemaType === 'home' || schemaType === 'historia';
 ---
 
 <!doctype html>
@@ -25,19 +138,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="ca" href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Open Graph -->
+    <meta property="og:site_name" content="La Guita Grossa" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ca_ES" />
 
-    <!-- Twitter -->
+    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -52,6 +171,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
 
     <title>{title}</title>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrganization)} />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaWebSite)} />
+    {showEvent && <script type="application/ld+json" set:html={JSON.stringify(schemaEvent)} />}
+    {breadcrumb && <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />}
   </head>
   <body class="min-h-screen flex flex-col">
     <Navigation />
