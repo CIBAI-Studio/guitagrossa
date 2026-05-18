@@ -1,0 +1,61 @@
+{
+  "categories": [
+    {
+      "title": "CAP DE COLLA",
+      "members": [{ "name": "Jordi Capdevila i Carbajo", "years": null }]
+    },
+    {
+      "title": "BARRISTES",
+      "members": [
+        { "name": "Jordi Capdevila i Carbajo", "years": 43 },
+        { "name": "Jordi Martin i Castilla", "years": 29 },
+        { "name": "Jordi Freixa Serra", "years": 26 },
+        { "name": "Ramon Sanchez Vazquez", "years": 20 },
+        { "name": "Mario Erra Duran", "years": 18 },
+        { "name": "Joan Gassó Capdevila", "years": 17 },
+        { "name": "Mateo Gomez Perarnau", "years": 16 },
+        { "name": "J. Marti Pont Santamaria", "years": 8 }
+      ]
+    },
+    {
+      "title": "GUITAIRES",
+      "members": [
+        { "name": "Manel Fernandez Sosa", "years": 37 },
+        { "name": "Antoni Font Vilella", "years": 30 },
+        { "name": "Ricard Gil Porcel", "years": 29 },
+        { "name": "Marc Noguera Perarnau", "years": 26 },
+        { "name": "Cristian Tejerina Noguerola", "years": 24 },
+        { "name": "Jordi Selga Freixas", "years": 24 },
+        { "name": "Joaquin Martin Castilla", "years": 23 },
+        { "name": "Cristina Farras Lizan", "years": 22 },
+        { "name": "Toni Perez Llimos", "years": 19 },
+        { "name": "Valeriano Sanchez Ruzafa", "years": 18 },
+        { "name": "Sergi Flotats Sabata", "years": 17 },
+        { "name": "Albert Picas Boixader", "years": 17 },
+        { "name": "Laura Picas Boixader", "years": 14 },
+        { "name": "Jordi Valencia Garcia", "years": 14 },
+        { "name": "Mireia Capdevila Garcia", "years": 13 },
+        { "name": "Xavi Coma Corominas", "years": 11 },
+        { "name": "David Vazquez Roco", "years": 11 },
+        { "name": "Jordi Jodar Bague", "years": 10 },
+        { "name": "Ivan Urbano Barons", "years": 8 },
+        { "name": "Ignasi Colomer Cadenas", "years": 8 }
+      ]
+    },
+    {
+      "title": "COL·LABORADORS",
+      "members": [
+        { "name": "Aina Capdevila Garcia", "years": 8 },
+        { "name": "Ricard Gil Sitjes", "years": 7 },
+        { "name": "Queralt Vinyes Ripoll", "years": 7 },
+        { "name": "Ivan Juvany Blanco", "years": 7 },
+        { "name": "Jacint Tubau Riera", "years": 7 },
+        { "name": "Ton Nadal Fontanals", "years": 4 },
+        { "name": "Francesc Josep Andujan", "years": 4 },
+        { "name": "Adria Casavella Torrentalle", "years": 4 },
+        { "name": "Jonny Serra Soler", "years": 3 },
+        { "name": "Jonny Martinez Bayona", "years": 3 }
+      ]
+    }
+  ]
+}

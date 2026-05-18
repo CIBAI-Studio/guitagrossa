@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="La Guita Grossa — La Patum de Berga">
+  <!-- Hero -->
+  <section class="relative min-h-svh flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-bg">
+      <!-- Placeholder: reemplazar con imagen hero del client -->
+      <div class="absolute inset-0 bg-[#2D2D2D]"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-overlay/40 to-bg"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-4 max-w-3xl">
+      <p class="text-primary text-[0.6875rem] font-semibold tracking-[0.08em] uppercase mb-6">
+        Comparsa de La Patum de Berga
+      </p>
+      <h1 class="text-[clamp(2.5rem,6vw,5rem)] font-bold text-text leading-[1.2]">
+        La Guita Grossa
+      </h1>
+      <div class="mt-8 h-px w-24 bg-primary/30 mx-auto"></div>
+      <p class="mt-8 text-text-muted text-lg sm:text-xl max-w-xl mx-auto text-balance">
+        Patrimoni Immaterial de la Humanitat per la UNESCO
+      </p>
+      <a
+        href="#galeria"
+        class="inline-flex items-center gap-2 mt-12 px-6 py-3 glass-prominent rounded-[--radius-md] text-sm font-medium text-text hover:text-primary transition-colors tracking-[0.08em] uppercase"
+        aria-label="Desplaçar-se a la galeria"
+      >
+        Descobreix
+        <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Photo Slider -->
+  <section id="galeria" class="py-16 sm:py-24 bg-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-primary text-[0.6875rem] font-semibold tracking-[0.08em] uppercase">Galeria</p>
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold text-text mt-3">Moments de foc i festa</h2>
+      </div>
+
+      <div
+        class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-4 px-4"
+        role="region"
+        aria-label="Galeria de fotos"
+        tabindex="0"
+      >
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div class="snap-start shrink-0">
+            <div class="min-w-[260px] h-[380px] rounded-[--radius-lg] overflow-hidden shadow-[--shadow-md]">
+              <!-- Placeholder: reemplazar con fotos del client -->
+              <div class="w-full h-full bg-gradient-to-br from-bg to-[#2D2D2D] flex items-center justify-center">
+                <span class="text-text-muted text-sm">Foto {i + 1}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex justify-center gap-2 mt-6" aria-hidden="true">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div class:list={['w-2 h-2 rounded-full', i === 0 ? 'bg-primary' : 'bg-border']}></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-16 sm:py-24 bg-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div class="glass rounded-[--radius-lg] p-8">
+          <p class="text-primary text-[0.6875rem] font-semibold tracking-[0.08em] uppercase mb-4">Sobre la Guita</p>
+          <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold text-text mb-6">
+            Una tradició centenària
+          </h2>
+          <p class="text-text-muted leading-relaxed">
+            La Guita Grossa és una de les comparses més emblemàtiques de La Patum de Berga,
+            festa declarada Patrimoni Immaterial de la Humanitat per la UNESCO l'any 2005.
+            Generació rere generació, els seus integrants mantenen viva la flama d'aquesta
+            tradició ancestral de foc, música i festa.
+          </p>
+          <a
+            href="/historia"
+            class="inline-block mt-6 text-sm font-medium text-primary hover:text-primary-dark transition-colors tracking-[0.08em] uppercase"
+          >
+            Coneix la nostra història →
+          </a>
+        </div>
+        <div class="aspect-[4/3] rounded-[--radius-lg] overflow-hidden shadow-[--shadow-md]">
+          <div class="w-full h-full bg-gradient-to-br from-bg to-[#2D2D2D] flex items-center justify-center">
+            <span class="text-text-muted text-sm">Foto La Patum — pendent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 sm:py-24 bg-bg text-center">
+    <div class="mx-auto max-w-2xl px-4">
+      <h2 class="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold text-text">Vols saber-ne més?</h2>
+      <p class="mt-4 text-text-muted text-lg">
+        Descobreix els integrants i com contactar amb nosaltres.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 mt-8">
+        <a
+          href="/integrants"
+          class="px-6 py-3 bg-primary text-text text-sm font-semibold tracking-[0.08em] uppercase rounded-[--radius-md] hover:bg-primary-dark hover:shadow-[--shadow-glow-red] transition-all"
+        >
+          Els integrants
+        </a>
+        <a
+          href="/contacte"
+          class="px-6 py-3 glass rounded-[--radius-md] text-text text-sm font-semibold tracking-[0.08em] uppercase hover:bg-white/12 transition-colors"
+        >
+          Contacta'ns
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #C41E3A;
+  --color-primary-dark: #a31830;
+  --color-secondary: #2D5F2D;
+  --color-bg: #1A1A1A;
+  --color-surface: rgba(255, 255, 255, 0.08);
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-text: #FAFAFA;
+  --color-text-muted: rgba(250, 250, 250, 0.55);
+  --color-overlay: rgba(26, 26, 26, 0.72);
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow-red: 0 0 32px rgba(196, 30, 58, 0.3);
+  --shadow-glow-green: 0 0 24px rgba(45, 95, 45, 0.25);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  h1, h2, h3, h4 {
+    line-height: 1.2;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-subtle {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-prominent {
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .glass-nav {
+    background: rgba(26, 26, 26, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-crimson {
+    background: rgba(196, 30, 58, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(196, 30, 58, 0.25);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}

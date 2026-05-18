@@ -1,0 +1,70 @@
+---
+---
+
+<div
+  id="music-player"
+  class="fixed bottom-6 right-6 z-[300] glass-crimson rounded-[--radius-lg] shadow-[--shadow-md] transition-all duration-300 w-16 hover:w-[280px] group overflow-hidden"
+>
+  <button
+    id="music-toggle"
+    class="flex items-center gap-3 w-full px-4 py-4 text-text hover:text-primary transition-colors"
+    aria-label="Reproduir música"
+    type="button"
+  >
+    <svg
+      id="icon-play"
+      class="w-5 h-5 shrink-0"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="M8 5v14l11-7z" />
+    </svg>
+    <svg
+      id="icon-pause"
+      class="w-5 h-5 shrink-0 hidden"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+    </svg>
+    <span
+      id="music-label"
+      class="text-xs font-semibold tracking-[0.08em] uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+      Música ambiental
+    </span>
+  </button>
+
+  <audio id="audio-player" loop preload="none">
+    <source src="/audio/ambient.mp3" type="audio/mpeg" />
+  </audio>
+</div>
+
+<script>
+  const toggle = document.getElementById('music-toggle')!;
+  const audio = document.getElementById('audio-player') as HTMLAudioElement;
+  const iconPlay = document.getElementById('icon-play')!;
+  const iconPause = document.getElementById('icon-pause')!;
+  const label = document.getElementById('music-label')!;
+
+  let playing = false;
+
+  toggle.addEventListener('click', () => {
+    if (playing) {
+      audio.pause();
+      iconPlay.classList.remove('hidden');
+      iconPause.classList.add('hidden');
+      label.textContent = 'Música ambiental';
+      toggle.setAttribute('aria-label', 'Reproduir música');
+    } else {
+      audio.play().catch(() => {});
+      iconPlay.classList.add('hidden');
+      iconPause.classList.remove('hidden');
+      label.textContent = 'Pausa';
+      toggle.setAttribute('aria-label', 'Pausar música');
+    }
+    playing = !playing;
+  });
+</script>

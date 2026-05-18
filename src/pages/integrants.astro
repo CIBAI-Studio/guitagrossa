@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import integrantsData from '../data/integrants.json';
+---
+
+<Layout
+  title="Integrants — La Guita Grossa"
+  description="Coneix els integrants de La Guita Grossa: barristes, guitaires, col·laboradors i el cap de colla."
+>
+  <!-- Header -->
+  <section class="pt-28 pb-16 bg-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-primary text-[0.6875rem] font-semibold tracking-[0.08em] uppercase">La nostra gent</p>
+      <h1 class="text-[clamp(2.5rem,6vw,5rem)] font-bold text-text mt-3">Integrants</h1>
+      <div class="mt-6 h-px w-16 bg-primary/30 mx-auto"></div>
+      <p class="mt-6 text-text-muted max-w-lg mx-auto">
+        Les persones que fan possible que La Guita Grossa surti al carrer any rere any.
+      </p>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="py-8 sm:py-12 bg-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      {integrantsData.categories.map((category) => (
+        <div class="mb-16 last:mb-0">
+          <div class="flex items-center gap-4 mb-8">
+            <h2 class="text-[0.6875rem] tracking-[0.08em] uppercase text-primary font-semibold">
+              {category.title}
+            </h2>
+            <div class="flex-1 h-px bg-border"></div>
+            <span class="text-xs text-text-muted">
+              {category.members.length} {category.members.length === 1 ? 'membre' : 'membres'}
+            </span>
+          </div>
+
+          <div class="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-6">
+            {category.members.map((member) => (
+              <article class="glass rounded-[--radius-lg] p-5 transition-all duration-200 hover:scale-[1.03] hover:shadow-[--shadow-glow-red] group">
+                <span class="inline-block bg-primary text-text text-[0.6875rem] font-semibold tracking-[0.08em] uppercase px-2.5 py-0.5 rounded-full mb-4">
+                  {category.title === 'CAP DE COLLA' ? 'Cap de Colla' :
+                   category.title === 'BARRISTES' ? 'Barrista' :
+                   category.title === 'GUITAIRES' ? 'Guitaire' : 'Col·laborador'}
+                </span>
+
+                <!-- Photo placeholder -->
+                <div class="aspect-square rounded-[--radius-lg] overflow-hidden mb-4 bg-[#252525]">
+                  <div class="w-full h-full flex items-center justify-center">
+                    <svg class="w-10 h-10 text-text-muted/30" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <h3 class="text-[1.25rem] font-semibold text-text leading-tight group-hover:text-primary transition-colors">
+                  {member.name}
+                </h3>
+                {member.years !== null && (
+                  <p class="text-text-muted text-[0.875rem] mt-2">
+                    {member.years} anys de guita
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
