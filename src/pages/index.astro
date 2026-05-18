@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="La Guita Grossa — La Patum de Berga">
+  <!-- Hero -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-guita-dark">
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-guita-dark/40 via-guita-dark/60 to-guita-dark"
+      ></div>
+      <!-- Placeholder: reemplazar con imagen hero del client -->
+      <div class="absolute inset-0 bg-[url('/images/hero-placeholder.jpg')] bg-cover bg-center opacity-50"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-4 max-w-3xl">
+      <p class="text-guita-gold text-sm tracking-[0.3em] uppercase mb-6 font-medium">
+        La Patum de Berga
+      </p>
+      <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-bold leading-tight">
+        La Guita Grossa
+      </h1>
+      <div class="mt-8 h-px w-24 bg-guita-gold/40 mx-auto"></div>
+      <p class="mt-8 text-white/60 text-lg sm:text-xl max-w-xl mx-auto text-balance">
+        Patrimoni Immaterial de la Humanitat per la UNESCO
+      </p>
+      <a
+        href="#galeria"
+        class="inline-flex items-center gap-2 mt-12 text-sm text-white/50 hover:text-white transition-colors tracking-widest uppercase"
+        aria-label="Desplaçar-se a la galeria"
+      >
+        Descobreix
+        <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Photo Slider -->
+  <section id="galeria" class="py-20 bg-guita-cream">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-guita-red text-sm tracking-[0.2em] uppercase font-medium">Galeria</p>
+        <h2 class="font-display text-3xl sm:text-4xl text-guita-dark mt-3">Moments de foc i festa</h2>
+      </div>
+
+      <div
+        class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-4 px-4"
+        role="region"
+        aria-label="Galeria de fotos"
+        tabindex="0"
+      >
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div class="snap-center shrink-0 first:pl-0 last:pr-0">
+            <div class="w-72 sm:w-80 aspect-[4/5] rounded-lg overflow-hidden bg-guita-dark/5">
+              <!-- Placeholder: reemplazar con fotos del client -->
+              <div class="w-full h-full bg-gradient-to-br from-guita-dark/10 to-guita-dark/5 flex items-center justify-center">
+                <span class="text-guita-dark/20 text-sm">Foto {i + 1}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex justify-center gap-2 mt-6" aria-hidden="true">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div class="w-1.5 h-1.5 rounded-full bg-guita-dark/20 first:bg-guita-red"></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-guita-dark text-center">
+    <div class="mx-auto max-w-2xl px-4">
+      <h2 class="font-display text-3xl sm:text-4xl text-white">Vols saber-ne més?</h2>
+      <p class="mt-4 text-white/50 text-lg">
+        Descobreix la història, els integrants i com contactar amb nosaltres.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 mt-8">
+        <a
+          href="/historia"
+          class="px-6 py-3 bg-guita-red text-white text-sm tracking-wider uppercase rounded hover:bg-guita-red-light transition-colors"
+        >
+          La nostra història
+        </a>
+        <a
+          href="/contacte"
+          class="px-6 py-3 border border-white/20 text-white/80 text-sm tracking-wider uppercase rounded hover:border-white/40 hover:text-white transition-colors"
+        >
+          Contacta&apos;ns
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

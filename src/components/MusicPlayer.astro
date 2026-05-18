@@ -1,0 +1,65 @@
+---
+---
+
+<div
+  id="music-player"
+  class="fixed bottom-4 right-4 z-40 glass-dark rounded-full transition-all duration-300"
+>
+  <button
+    id="music-toggle"
+    class="flex items-center gap-2 px-4 py-2.5 text-white/80 hover:text-white transition-colors"
+    aria-label="Reproduir música"
+    type="button"
+  >
+    <svg
+      id="icon-play"
+      class="w-4 h-4"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="M8 5v14l11-7z" />
+    </svg>
+    <svg
+      id="icon-pause"
+      class="w-4 h-4 hidden"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+    </svg>
+    <span id="music-label" class="text-xs tracking-wider uppercase hidden sm:inline">Música</span>
+  </button>
+
+  <audio id="audio-player" loop preload="none">
+    <source src="/audio/ambient.mp3" type="audio/mpeg" />
+  </audio>
+</div>
+
+<script>
+  const toggle = document.getElementById('music-toggle')!;
+  const audio = document.getElementById('audio-player') as HTMLAudioElement;
+  const iconPlay = document.getElementById('icon-play')!;
+  const iconPause = document.getElementById('icon-pause')!;
+  const label = document.getElementById('music-label')!;
+
+  let playing = false;
+
+  toggle.addEventListener('click', () => {
+    if (playing) {
+      audio.pause();
+      iconPlay.classList.remove('hidden');
+      iconPause.classList.add('hidden');
+      label.textContent = 'Música';
+      toggle.setAttribute('aria-label', 'Reproduir música');
+    } else {
+      audio.play().catch(() => {});
+      iconPlay.classList.add('hidden');
+      iconPause.classList.remove('hidden');
+      label.textContent = 'Pausa';
+      toggle.setAttribute('aria-label', 'Pausar música');
+    }
+    playing = !playing;
+  });
+</script>

@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Història — La Guita Grossa"
+  description="La història de La Guita Grossa, una de les comparses més emblemàtiques de La Patum de Berga."
+>
+  <!-- Header -->
+  <section class="pt-28 pb-16 bg-guita-dark">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-guita-gold text-sm tracking-[0.2em] uppercase font-medium">La nostra</p>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl text-white mt-3">Història</h1>
+      <div class="mt-6 h-px w-16 bg-guita-gold/30 mx-auto"></div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16 sm:py-20 bg-guita-cream">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <!-- Block 1 -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16 sm:mb-20">
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl text-guita-dark mb-4">
+            Els orígens
+          </h2>
+          <p class="text-guita-dark/70 leading-relaxed">
+            La Guita Grossa és una de les comparses més emblemàtiques de La Patum de Berga,
+            festa declarada Patrimoni Immaterial de la Humanitat per la UNESCO l'any 2005.
+            La seva presència a la festa es remunta a segles d'història i tradició.
+          </p>
+          <p class="text-guita-dark/70 leading-relaxed mt-4">
+            <!-- Placeholder: text pendent del client -->
+            Text pendent de confirmació pel client. Aquesta secció descriurà els orígens
+            històrics de la comparsa i la seva evolució al llarg dels anys.
+          </p>
+        </div>
+        <div class="aspect-[4/3] rounded-lg overflow-hidden bg-guita-dark/5">
+          <!-- Placeholder: reemplazar con imagen del client -->
+          <div class="w-full h-full bg-gradient-to-br from-guita-green/10 to-guita-red/10 flex items-center justify-center">
+            <span class="text-guita-dark/20 text-sm">Imatge històrica</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 2 -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16 sm:mb-20">
+        <div class="order-2 md:order-1 aspect-[4/3] rounded-lg overflow-hidden bg-guita-dark/5">
+          <div class="w-full h-full bg-gradient-to-br from-guita-red/10 to-guita-green/10 flex items-center justify-center">
+            <span class="text-guita-dark/20 text-sm">La Patum</span>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <h2 class="font-display text-2xl sm:text-3xl text-guita-dark mb-4">
+            La Patum
+          </h2>
+          <p class="text-guita-dark/70 leading-relaxed">
+            La Patum és la festa major de la ciutat de Berga, al Berguedà. Celebrada durant
+            la setmana de Corpus Christi, és una festa ancestral de foc, música i tradició
+            que atrau milers de visitants cada any.
+          </p>
+          <p class="text-guita-dark/70 leading-relaxed mt-4">
+            <!-- Placeholder: text pendent del client -->
+            Text pendent de confirmació pel client. Aquí s'explicarà la relació entre
+            La Guita Grossa i la festa de La Patum.
+          </p>
+        </div>
+      </div>
+
+      <!-- Block 3 -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl text-guita-dark mb-4">
+            Tradició viva
+          </h2>
+          <p class="text-guita-dark/70 leading-relaxed">
+            Generació rere generació, els membres de La Guita Grossa han mantingut viva
+            la flama d'aquesta tradició centenària. Amb orgull i dedicació, cada any
+            la comparsa surt al carrer per fer vibrar Berga.
+          </p>
+          <p class="text-guita-dark/70 leading-relaxed mt-4">
+            <!-- Placeholder: text pendent del client -->
+            Text pendent de confirmació pel client. Aquesta secció descriurà la
+            continuïtat de la tradició fins als nostres dies.
+          </p>
+        </div>
+        <div class="aspect-[4/3] rounded-lg overflow-hidden bg-guita-dark/5">
+          <div class="w-full h-full bg-gradient-to-br from-guita-gold/10 to-guita-dark/10 flex items-center justify-center">
+            <span class="text-guita-dark/20 text-sm">Tradició</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery strip -->
+  <section class="py-16 bg-guita-dark">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-2xl sm:text-3xl text-white text-center mb-10">
+        Galeria històrica
+      </h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div class="aspect-square rounded-lg overflow-hidden bg-white/5">
+            <div class="w-full h-full bg-gradient-to-br from-white/5 to-white/0 flex items-center justify-center">
+              <span class="text-white/20 text-xs">Foto {i + 1}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import integrantsData from '../data/integrants.json';
+
+const categoryColors: Record<string, string> = {
+  'CAP DE COLLA': 'bg-guita-gold/20 text-guita-gold-light border-guita-gold/30',
+  'BARRISTES': 'bg-guita-red/20 text-guita-red-light border-guita-red/30',
+  'GUITAIRES': 'bg-guita-green/20 text-guita-green-light border-guita-green/30',
+  'COL·LABORADORS': 'bg-white/10 text-white/70 border-white/20',
+};
+---
+
+<Layout
+  title="Integrants — La Guita Grossa"
+  description="Coneix els integrants de La Guita Grossa: barristes, guitaires, col·laboradors i el cap de colla."
+>
+  <!-- Header -->
+  <section class="pt-28 pb-16 bg-guita-dark">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-guita-gold text-sm tracking-[0.2em] uppercase font-medium">La nostra gent</p>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl text-white mt-3">Integrants</h1>
+      <div class="mt-6 h-px w-16 bg-guita-gold/30 mx-auto"></div>
+      <p class="mt-6 text-white/50 max-w-lg mx-auto">
+        Les persones que fan possible que La Guita Grossa surti al carrer any rere any.
+      </p>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="py-16 sm:py-20 bg-guita-dark">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      {integrantsData.categories.map((category) => (
+        <div class="mb-16 last:mb-0">
+          <div class="flex items-center gap-4 mb-8">
+            <h2 class="text-sm tracking-[0.2em] uppercase text-guita-gold font-medium">
+              {category.title}
+            </h2>
+            <div class="flex-1 h-px bg-white/10"></div>
+            <span class="text-xs text-white/30">
+              {category.members.length} {category.members.length === 1 ? 'membre' : 'membres'}
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {category.members.map((member) => (
+              <article class="glass rounded-lg p-5 hover:bg-white/12 transition-colors group">
+                <div class="flex items-start justify-between gap-3">
+                  <div class="flex-1 min-w-0">
+                    <h3 class="text-white font-medium text-sm leading-tight group-hover:text-guita-gold transition-colors">
+                      {member.name}
+                    </h3>
+                    {member.years !== null && (
+                      <p class="text-white/40 text-xs mt-2">
+                        Anys de guita: <span class="text-white/60 font-medium">{member.years}</span>
+                      </p>
+                    )}
+                  </div>
+                  <span
+                    class:list={[
+                      'shrink-0 text-[10px] tracking-wider uppercase px-2 py-1 rounded border',
+                      categoryColors[category.title] || 'bg-white/10 text-white/60 border-white/20',
+                    ]}
+                  >
+                    {category.title === 'CAP DE COLLA' ? 'Cap' :
+                     category.title === 'BARRISTES' ? 'Barr.' :
+                     category.title === 'GUITAIRES' ? 'Guit.' : 'Col·lab.'}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

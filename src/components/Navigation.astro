@@ -1,0 +1,101 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'Inici' },
+  { href: '/historia', label: 'Història' },
+  { href: '/integrants', label: 'Integrants' },
+  { href: '/contacte', label: 'Contacte' },
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 glass-dark" aria-label="Navegació principal">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <a href="/" class="font-display text-lg font-bold text-guita-gold tracking-wide">
+        La Guita Grossa
+      </a>
+
+      <!-- Desktop nav -->
+      <ul class="hidden md:flex items-center gap-8" role="list">
+        {links.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'text-sm tracking-widest uppercase transition-colors duration-200',
+                currentPath === href || (href !== '/' && currentPath.startsWith(href))
+                  ? 'text-guita-gold'
+                  : 'text-white/70 hover:text-white',
+              ]}
+              aria-current={currentPath === href ? 'page' : undefined}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="menu-toggle"
+        class="md:hidden flex flex-col gap-1.5 p-2"
+        aria-label="Obrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="block h-0.5 w-6 bg-white transition-transform duration-300" id="bar-1"></span>
+        <span class="block h-0.5 w-6 bg-white transition-opacity duration-300" id="bar-2"></span>
+        <span class="block h-0.5 w-6 bg-white transition-transform duration-300" id="bar-3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden overflow-hidden max-h-0 transition-[max-height] duration-300 ease-in-out"
+    aria-hidden="true"
+  >
+    <ul class="px-4 pb-6 pt-2 space-y-4" role="list">
+      {links.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            class:list={[
+              'block text-sm tracking-widest uppercase',
+              currentPath === href || (href !== '/' && currentPath.startsWith(href))
+                ? 'text-guita-gold'
+                : 'text-white/70',
+            ]}
+            aria-current={currentPath === href ? 'page' : undefined}
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const bar1 = document.getElementById('bar-1')!;
+  const bar2 = document.getElementById('bar-2')!;
+  const bar3 = document.getElementById('bar-3')!;
+
+  let open = false;
+
+  toggle.addEventListener('click', () => {
+    open = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Tancar menú' : 'Obrir menú');
+    menu.setAttribute('aria-hidden', String(!open));
+    menu.style.maxHeight = open ? `${menu.scrollHeight}px` : '0';
+
+    bar1.style.transform = open ? 'rotate(45deg) translate(4px, 4px)' : '';
+    bar2.style.opacity = open ? '0' : '1';
+    bar3.style.transform = open ? 'rotate(-45deg) translate(4px, -4px)' : '';
+  });
+</script>
