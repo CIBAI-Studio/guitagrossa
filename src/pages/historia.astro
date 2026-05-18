@@ -4,24 +4,39 @@ import Layout from '../layouts/Layout.astro';
 const timeline = [
   {
     year: 'Orígens',
-    title: 'Els inicis de La Guita',
-    text: 'La Guita Grossa és una de les comparses més emblemàtiques de La Patum de Berga, festa declarada Patrimoni Immaterial de la Humanitat per la UNESCO l\'any 2005. La seva presència a la festa es remunta a segles d\'història i tradició.',
+    title: 'La Mulaguita, Mulafera o Mulassa',
+    text: 'La Guita Grossa és una figura mitològica de reminiscències infernals, probablement heretada de les antigues processons del Corpus Christi. Coneguda inicialment com a Mulaguita, Mulafera o Mulassa, sembla que el seu origen era el d\'una simple mula que, amb el temps, va anar transformant-se: el coll es va allargar progressivament fins a permetre-li atacar els espectadors que s\'arreceraven a la barana de la plaça Sant Pere.',
+    image: '/images/historia-01.webp',
   },
   {
-    year: 'La Patum',
-    title: 'Foc, música i tradició',
-    text: 'La Patum és la festa major de la ciutat de Berga, al Berguedà. Celebrada durant la setmana de Corpus Christi, és una festa ancestral de foc, música i tradició que atrau milers de visitants cada any.',
-  },
-  {
-    year: 'UNESCO',
-    title: 'Patrimoni de la Humanitat',
-    text: 'L\'any 2005, la UNESCO va declarar La Patum de Berga Obra Mestra del Patrimoni Oral i Immaterial de la Humanitat, reconeixent el valor excepcional d\'aquesta celebració centenària.',
+    year: 'Forma',
+    title: 'Cos de mula, coll de girafa',
+    text: 'Les Guites de la Patum es caracteritzen per la seva forma zoomòrfica peculiar: cos de mula, coll desproporcionadament llarg —que en alguns documents berguedans del final del segle XIX apareix comparat al d\'una girafa— i un cap ferèstec que recorda el d\'un drac. Quina era la seva funció simbòlica en les processons medievals del Corpus és avui dia desconeguda, però dins la Patum s\'ha associat tradicionalment a la representació del Mal i les forces malignes.',
+    image: '/images/historia-02.webp',
   },
   {
     year: 'Avui',
-    title: 'Tradició viva',
-    text: 'Generació rere generació, els membres de La Guita Grossa han mantingut viva la flama d\'aquesta tradició centenària. Amb orgull i dedicació, cada any la comparsa surt al carrer per fer vibrar Berga.',
+    title: 'Dues Guites: la Grossa i la Xica',
+    text: 'Avui, a la Patum conviuen dues Guites: la Grossa i la Xica, també anomenada Boja. La seva missió és córrer darrera el públic amb tres fuets encesos a la boca, generant aquella barreja d\'eufòria i enrenou que caracteritza la festa.',
+    image: '/images/historia-03.webp',
   },
+  {
+    year: 'Tradició',
+    title: 'Més de quatre metres d\'alçada',
+    text: 'Cada Guita és portada per un grup de persones que li donen vida des de sota: algú la guia des del davant, mentre que un altre, des de l\'interior, maniobra el cap al cim d\'un coll que, en el cas de la Guita Grossa, supera els quatre metres d\'alçada.',
+    image: '/images/historia-04.webp',
+  },
+];
+
+const galeriaImages = [
+  { src: '/images/galeria-01.webp', alt: 'La Guita Grossa durant la Patum' },
+  { src: '/images/galeria-02.webp', alt: 'Foc i festa a la plaça Sant Pere' },
+  { src: '/images/galeria-03.webp', alt: 'La comparsa en acció' },
+  { src: '/images/galeria-04.webp', alt: 'Integrants portant la Guita' },
+  { src: '/images/galeria-05.webp', alt: 'Fuets encesos de la Guita Grossa' },
+  { src: '/images/galeria-06.webp', alt: 'La Patum de Berga' },
+  { src: '/images/galeria-07.webp', alt: 'Nit de foc a Berga' },
+  { src: '/images/galeria-08.webp', alt: 'Tradició centenària de la Guita' },
 ];
 ---
 
@@ -65,17 +80,20 @@ const timeline = [
             </span>
             <h3 class="text-[1.25rem] font-semibold text-text mb-3">{item.title}</h3>
             <p class="text-text-muted text-[0.875rem] leading-relaxed">{item.text}</p>
-            <p class="text-text-muted/50 text-xs mt-3 italic">Text pendent de confirmació pel client.</p>
           </div>
 
-          <!-- Image placeholder -->
+          <!-- Image -->
           <div class:list={[
             'hidden md:block ml-10 md:ml-0 md:[direction:ltr]',
           ]}>
             <div class="aspect-[4/3] rounded-[--radius-lg] overflow-hidden shadow-[--shadow-sm]">
-              <div class="w-full h-full bg-gradient-to-br from-bg to-[#2D2D2D] flex items-center justify-center">
-                <span class="text-text-muted text-sm">Foto — pendent</span>
-              </div>
+              <img
+                src={item.image}
+                alt={item.title}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </div>
         </div>
@@ -90,11 +108,15 @@ const timeline = [
         Galeria històrica
       </h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {galeriaImages.map((img) => (
           <div class="aspect-square rounded-[--radius-lg] overflow-hidden shadow-[--shadow-sm]">
-            <div class="w-full h-full bg-gradient-to-br from-surface to-bg flex items-center justify-center">
-              <span class="text-text-muted text-xs">Foto {i + 1}</span>
-            </div>
+            <img
+              src={img.src}
+              alt={img.alt}
+              class="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         ))}
       </div>
