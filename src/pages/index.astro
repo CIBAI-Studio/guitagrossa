@@ -1,13 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const sliderImages = [
+  { src: '/images/slider-01.webp', alt: 'La Guita Grossa a la Patum de Berga' },
+  { src: '/images/slider-02.webp', alt: 'Foc i festa nocturna' },
+  { src: '/images/slider-03.webp', alt: 'La comparsa en plena actuació' },
+  { src: '/images/slider-04.webp', alt: 'Fuets encesos a la plaça' },
+  { src: '/images/slider-05.webp', alt: 'Nit de Patum' },
+  { src: '/images/slider-06.webp', alt: 'Tradició i festa' },
+];
 ---
 
 <Layout title="La Guita Grossa — La Patum de Berga">
   <!-- Hero -->
   <section class="relative min-h-svh flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 bg-bg">
-      <!-- Placeholder: reemplazar con imagen hero del client -->
-      <div class="absolute inset-0 bg-[#2D2D2D]"></div>
+      <img
+        src="/images/hero-patum.webp"
+        alt="La Guita Grossa durant la Patum de Berga"
+        class="absolute inset-0 w-full h-full object-cover"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
       <div class="absolute inset-0 bg-gradient-to-b from-transparent via-overlay/40 to-bg"></div>
     </div>
 
@@ -49,20 +64,23 @@ import Layout from '../layouts/Layout.astro';
         aria-label="Galeria de fotos"
         tabindex="0"
       >
-        {Array.from({ length: 6 }).map((_, i) => (
+        {sliderImages.map((img) => (
           <div class="snap-start shrink-0">
             <div class="min-w-[260px] h-[380px] rounded-[--radius-lg] overflow-hidden shadow-[--shadow-md]">
-              <!-- Placeholder: reemplazar con fotos del client -->
-              <div class="w-full h-full bg-gradient-to-br from-bg to-[#2D2D2D] flex items-center justify-center">
-                <span class="text-text-muted text-sm">Foto {i + 1}</span>
-              </div>
+              <img
+                src={img.src}
+                alt={img.alt}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </div>
         ))}
       </div>
 
       <div class="flex justify-center gap-2 mt-6" aria-hidden="true">
-        {Array.from({ length: 6 }).map((_, i) => (
+        {sliderImages.map((_, i) => (
           <div class:list={['w-2 h-2 rounded-full', i === 0 ? 'bg-primary' : 'bg-border']}></div>
         ))}
       </div>
@@ -79,10 +97,10 @@ import Layout from '../layouts/Layout.astro';
             Una tradició centenària
           </h2>
           <p class="text-text-muted leading-relaxed">
-            La Guita Grossa és una de les comparses més emblemàtiques de La Patum de Berga,
-            festa declarada Patrimoni Immaterial de la Humanitat per la UNESCO l'any 2005.
-            Generació rere generació, els seus integrants mantenen viva la flama d'aquesta
-            tradició ancestral de foc, música i festa.
+            La Guita Grossa és una figura mitològica de reminiscències infernals,
+            probablement heretada de les antigues processons del Corpus Christi.
+            Generació rere generació, els seus integrants mantenen viva la flama
+            d'aquesta tradició ancestral de foc, música i festa a Berga.
           </p>
           <a
             href="/historia"
@@ -92,9 +110,13 @@ import Layout from '../layouts/Layout.astro';
           </a>
         </div>
         <div class="aspect-[4/3] rounded-[--radius-lg] overflow-hidden shadow-[--shadow-md]">
-          <div class="w-full h-full bg-gradient-to-br from-bg to-[#2D2D2D] flex items-center justify-center">
-            <span class="text-text-muted text-sm">Foto La Patum — pendent</span>
-          </div>
+          <img
+            src="/images/about-patum.webp"
+            alt="La Patum de Berga, foc i tradició"
+            class="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
     </div>
