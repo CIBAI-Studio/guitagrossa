@@ -1,0 +1,327 @@
+---
+import '../../styles/global.css';
+import { readContent } from '../../lib/content';
+const content = readContent();
+---
+
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Dashboard — Admin — La Guita Grossa</title>
+</head>
+<body class="min-h-screen bg-bg">
+
+  <!-- Header -->
+  <header class="glass-nav sticky top-0 z-50 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <h1 class="text-lg font-bold text-text">Admin</h1>
+        <span class="text-text-muted text-sm">La Guita Grossa</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/" target="_blank" class="text-sm text-text-muted hover:text-text transition-colors">Veure web ↗</a>
+        <button id="logout-btn" class="glass-btn px-4 py-2 rounded-full text-sm text-text">Sortir</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Tabs -->
+    <div class="flex gap-2 mb-8 overflow-x-auto">
+      <button class="tab-btn active glass-btn-primary px-5 py-2.5 rounded-full text-sm font-medium text-text" data-tab="hero">Hero / Vídeo</button>
+      <button class="tab-btn glass-btn px-5 py-2.5 rounded-full text-sm font-medium text-text" data-tab="texts">Textos</button>
+      <button class="tab-btn glass-btn px-5 py-2.5 rounded-full text-sm font-medium text-text" data-tab="gallery">Galeria</button>
+      <button class="tab-btn glass-btn px-5 py-2.5 rounded-full text-sm font-medium text-text" data-tab="historia">Història</button>
+    </div>
+
+    <!-- ─── TAB: Hero / Video ─── -->
+    <div id="tab-hero" class="tab-content">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="glass-card rounded-[--radius-xl] p-6">
+          <h2 class="text-lg font-bold text-text mb-6">Textos del Hero</h2>
+          <form id="hero-form" class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-text mb-1">Títol</label>
+              <input type="text" name="title" value={content.hero.title} class="w-full px-3 py-2 glass-input rounded-[--radius-md] text-text text-sm" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-text mb-1">Subtítol</label>
+              <input type="text" name="subtitle" value={content.hero.subtitle} class="w-full px-3 py-2 glass-input rounded-[--radius-md] text-text text-sm" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-text mb-1">Lema</label>
+              <input type="text" name="tagline" value={content.hero.tagline} class="w-full px-3 py-2 glass-input rounded-[--radius-md] text-text text-sm" />
+            </div>
+            <button type="submit" class="glass-btn-primary px-5 py-2 rounded-full text-sm font-medium text-text">Desar canvis</button>
+          </form>
+        </div>
+
+        <div class="glass-card rounded-[--radius-xl] p-6">
+          <h2 class="text-lg font-bold text-text mb-6">Vídeo del Hero</h2>
+          <div id="current-video" class="mb-4">
+            {content.hero.videoFile ? (
+              <div class="space-y-3">
+                <video src={content.hero.videoFile} class="w-full rounded-[--radius-lg] max-h-48 object-cover" controls muted></video>
+                <button id="delete-video-btn" class="glass-btn px-4 py-2 rounded-full text-sm text-primary" data-url={content.hero.videoFile}>
+                  Eliminar vídeo
+                </button>
+              </div>
+            ) : (
+              <p class="text-text-muted text-sm">Cap vídeo pujat. Es mostrarà la imatge per defecte.</p>
+            )}
+          </div>
+          <form id="video-upload-form" class="space-y-3">
+            <label class="block">
+              <span class="text-sm font-medium text-text">Pujar nou vídeo</span>
+              <input type="file" name="file" accept="video/*" class="mt-2 block w-full text-sm text-text-muted file:glass-btn file:rounded-full file:px-4 file:py-2 file:text-sm file:text-text file:border-0 file:cursor-pointer" />
+            </label>
+            <div id="video-progress" class="hidden">
+              <div class="w-full glass rounded-full h-2 overflow-hidden">
+                <div id="video-progress-bar" class="h-full bg-primary rounded-full transition-all duration-300" style="width: 0%"></div>
+              </div>
+              <p id="video-progress-text" class="text-xs text-text-muted mt-1">Pujant...</p>
+            </div>
+            <button type="submit" class="glass-btn-primary px-5 py-2 rounded-full text-sm font-medium text-text">Pujar vídeo</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── TAB: Texts ─── -->
+    <div id="tab-texts" class="tab-content hidden">
+      <div class="glass-card rounded-[--radius-xl] p-6">
+        <h2 class="text-lg font-bold text-text mb-6">Textos generals</h2>
+        <form id="texts-form" class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-text mb-1">Email formulari de contacte</label>
+            <input type="text" name="formAction" value={content.contacte.formAction} class="w-full px-3 py-2 glass-input rounded-[--radius-md] text-text text-sm" />
+          </div>
+          <button type="submit" class="glass-btn-primary px-5 py-2 rounded-full text-sm font-medium text-text">Desar canvis</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ─── TAB: Gallery ─── -->
+    <div id="tab-gallery" class="tab-content hidden">
+      <div class="glass-card rounded-[--radius-xl] p-6 mb-6">
+        <h2 class="text-lg font-bold text-text mb-4">Pujar fotos</h2>
+        <form id="gallery-upload-form" class="flex items-end gap-4 flex-wrap">
+          <label class="flex-1 min-w-[200px]">
+            <input type="file" name="files" accept="image/*" multiple class="block w-full text-sm text-text-muted file:glass-btn file:rounded-full file:px-4 file:py-2 file:text-sm file:text-text file:border-0 file:cursor-pointer" />
+          </label>
+          <button type="submit" class="glass-btn-primary px-5 py-2 rounded-full text-sm font-medium text-text whitespace-nowrap">Pujar fotos</button>
+        </form>
+      </div>
+
+      <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        {content.gallery.map((img) => (
+          <div class="gallery-item group relative rounded-[--radius-lg] overflow-hidden glass-card" data-url={img}>
+            <img src={img} alt="" class="w-full aspect-square object-cover" loading="lazy" />
+            <button
+              class="delete-gallery-btn absolute top-2 right-2 w-8 h-8 glass-prominent rounded-full flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-opacity"
+              data-url={img}
+              aria-label="Eliminar"
+            >✕</button>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ─── TAB: Historia ─── -->
+    <div id="tab-historia" class="tab-content hidden">
+      <div id="historia-entries" class="space-y-4">
+        {content.historia.timeline.map((item, i) => (
+          <div class="historia-entry glass-card rounded-[--radius-xl] p-6" data-index={i}>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-xs font-medium text-text-muted mb-1">Etiqueta</label>
+                  <input type="text" name="year" value={item.year} class="w-full px-3 py-2 glass-input rounded-[--radius-md] text-text text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-text-muted mb-1">Títol</label>
+                  <input type="text" name="title" value={item.title} class="w-full px-3 py-2 glass-input rounded-[--radius-md] text-text text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-text-muted mb-1">Text</label>
+                  <textarea name="text" rows="4" class="w-full px-3 py-2 glass-input rounded-[--radius-md] text-text text-sm resize-none">{item.text}</textarea>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-text-muted mb-1">Imatge</label>
+                <img src={item.image} alt="" class="w-full aspect-[4/3] object-cover rounded-[--radius-lg] mb-2" />
+                <input type="text" name="image" value={item.image} class="w-full px-3 py-2 glass-input rounded-[--radius-md] text-text text-sm" placeholder="URL de la imatge" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-6">
+        <button id="save-historia-btn" class="glass-btn-primary px-5 py-2 rounded-full text-sm font-medium text-text">Desar història</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 glass-prominent px-6 py-3 rounded-full text-sm font-medium text-text opacity-0 pointer-events-none transition-opacity duration-300 z-[999]"></div>
+
+  <script>
+    function showToast(msg: string) {
+      const t = document.getElementById('toast')!;
+      t.textContent = msg;
+      t.classList.remove('opacity-0');
+      t.classList.add('opacity-100');
+      setTimeout(() => { t.classList.remove('opacity-100'); t.classList.add('opacity-0'); }, 2500);
+    }
+
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('active', 'glass-btn-primary');
+          b.classList.add('glass-btn');
+        });
+        btn.classList.add('active', 'glass-btn-primary');
+        btn.classList.remove('glass-btn');
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        document.getElementById(`tab-${(btn as HTMLElement).dataset.tab}`)!.classList.remove('hidden');
+      });
+    });
+
+    // Logout
+    document.getElementById('logout-btn')!.addEventListener('click', async () => {
+      await fetch('/api/logout', { method: 'POST' });
+      window.location.href = '/admin';
+    });
+
+    // Hero form
+    document.getElementById('hero-form')!.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      await fetch('/api/content', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ hero: Object.fromEntries(fd) }),
+      });
+      showToast('Textos del hero desats');
+    });
+
+    // Video upload
+    document.getElementById('video-upload-form')!.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = (e.target as HTMLFormElement).querySelector('input[type=file]') as HTMLInputElement;
+      if (!input.files?.length) return;
+
+      const progress = document.getElementById('video-progress')!;
+      const bar = document.getElementById('video-progress-bar')!;
+      const text = document.getElementById('video-progress-text')!;
+      progress.classList.remove('hidden');
+
+      const fd = new FormData();
+      fd.append('file', input.files[0]);
+      fd.append('type', 'video');
+
+      const xhr = new XMLHttpRequest();
+      xhr.upload.onprogress = (ev) => {
+        if (ev.lengthComputable) {
+          const pct = Math.round((ev.loaded / ev.total) * 100);
+          bar.style.width = `${pct}%`;
+          text.textContent = `Pujant... ${pct}%`;
+        }
+      };
+      xhr.onload = () => {
+        progress.classList.add('hidden');
+        if (xhr.status === 200) {
+          showToast('Vídeo pujat correctament');
+          setTimeout(() => window.location.reload(), 1000);
+        } else {
+          showToast('Error pujant el vídeo');
+        }
+      };
+      xhr.open('POST', '/api/upload');
+      xhr.send(fd);
+    });
+
+    // Delete video
+    document.getElementById('delete-video-btn')?.addEventListener('click', async (e) => {
+      const url = (e.target as HTMLElement).dataset.url;
+      if (!confirm('Segur que vols eliminar el vídeo?')) return;
+      await fetch('/api/delete-file', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url, type: 'video' }),
+      });
+      showToast('Vídeo eliminat');
+      setTimeout(() => window.location.reload(), 800);
+    });
+
+    // Gallery upload
+    document.getElementById('gallery-upload-form')!.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = (e.target as HTMLFormElement).querySelector('input[type=file]') as HTMLInputElement;
+      if (!input.files?.length) return;
+
+      for (const file of Array.from(input.files)) {
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('type', 'gallery');
+        await fetch('/api/upload', { method: 'POST', body: fd });
+      }
+      showToast(`${input.files.length} foto(s) pujada(es)`);
+      setTimeout(() => window.location.reload(), 800);
+    });
+
+    // Gallery delete
+    document.querySelectorAll('.delete-gallery-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const url = (e.currentTarget as HTMLElement).dataset.url;
+        if (!confirm('Eliminar aquesta foto de la galeria?')) return;
+        await fetch('/api/delete-file', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url, type: 'gallery' }),
+        });
+        (e.currentTarget as HTMLElement).closest('.gallery-item')?.remove();
+        showToast('Foto eliminada');
+      });
+    });
+
+    // Texts form
+    document.getElementById('texts-form')!.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      await fetch('/api/content', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contacte: { formAction: fd.get('formAction') } }),
+      });
+      showToast('Textos desats');
+    });
+
+    // Historia save
+    document.getElementById('save-historia-btn')!.addEventListener('click', async () => {
+      const entries = document.querySelectorAll('.historia-entry');
+      const timeline = Array.from(entries).map(el => ({
+        year: (el.querySelector('[name=year]') as HTMLInputElement).value,
+        title: (el.querySelector('[name=title]') as HTMLInputElement).value,
+        text: (el.querySelector('[name=text]') as HTMLTextAreaElement).value,
+        image: (el.querySelector('[name=image]') as HTMLInputElement).value,
+      }));
+      await fetch('/api/content', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ historia: { timeline } }),
+      });
+      showToast('Història desada');
+    });
+  </script>
+</body>
+</html>

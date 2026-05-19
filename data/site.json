@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "title": "La Guita Grossa",
+    "subtitle": "Comparsa de La Patum de Berga",
+    "tagline": "Patrimoni Immaterial de la Humanitat per la UNESCO",
+    "videoFile": ""
+  },
+  "historia": {
+    "timeline": [
+      {
+        "year": "Orígens",
+        "title": "La Mulaguita, Mulafera o Mulassa",
+        "text": "La Guita Grossa és una figura mitològica de reminiscències infernals, probablement heretada de les antigues processons del Corpus Christi. Coneguda inicialment com a Mulaguita, Mulafera o Mulassa, sembla que el seu origen era el d'una simple mula que, amb el temps, va anar transformant-se: el coll es va allargar progressivament fins a permetre-li atacar els espectadors que s'arreceraven a la barana de la plaça Sant Pere.",
+        "image": "/images/historia-01.webp"
+      },
+      {
+        "year": "Forma",
+        "title": "Cos de mula, coll de girafa",
+        "text": "La Guita Grossa es caracteritza per la seva forma zoomòrfica peculiar: cos de mula, coll desproporcionadament llarg —que en alguns documents berguedans del final del segle XIX apareix comparat al d'una girafa— i un cap ferèstec que recorda el d'un drac. Dins la Patum s'ha associat tradicionalment a la representació del Mal i les forces malignes.",
+        "image": "/images/historia-02.webp"
+      },
+      {
+        "year": "Avui",
+        "title": "La Guita Grossa, icona de foc",
+        "text": "La Guita Grossa és avui una de les comparses més emblemàtiques i reconegudes de la Patum. La seva missió és córrer darrera el públic amb tres fuets encesos a la boca, generant aquella barreja d'eufòria i enrenou que caracteritza la festa. Generació rere generació, els seus integrants mantenen viva la flama d'aquesta tradició ancestral.",
+        "image": "/images/historia-03.webp"
+      },
+      {
+        "year": "Tradició",
+        "title": "Més de quatre metres d'alçada",
+        "text": "La Guita Grossa és portada per un grup de persones que li donen vida des de sota: algú la guia des del davant, mentre que un altre, des de l'interior, maniobra el cap al cim d'un coll que supera els quatre metres d'alçada. El resultat és una criatura viva, imprevisible i majestuosa enmig del foc.",
+        "image": "/images/historia-04.webp"
+      }
+    ]
+  },
+  "gallery": [
+    "/images/slider-01.webp",
+    "/images/slider-02.webp",
+    "/images/slider-03.webp",
+    "/images/slider-04.webp",
+    "/images/slider-05.webp",
+    "/images/slider-06.webp",
+    "/images/galeria-01.webp",
+    "/images/galeria-02.webp",
+    "/images/galeria-03.webp",
+    "/images/galeria-04.webp",
+    "/images/galeria-05.webp",
+    "/images/galeria-06.webp",
+    "/images/galeria-07.webp",
+    "/images/galeria-08.webp",
+    "/images/historia-01.webp",
+    "/images/historia-02.webp",
+    "/images/historia-03.webp",
+    "/images/historia-04.webp",
+    "/images/about-patum.webp"
+  ],
+  "contacte": {
+    "formAction": "https://airform.io/comparsa@guitagrossa.com"
+  }
+}

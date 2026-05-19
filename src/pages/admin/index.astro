@@ -1,0 +1,81 @@
+---
+import '../../styles/global.css';
+---
+
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Admin — La Guita Grossa</title>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-bg">
+  <div class="w-full max-w-sm px-4">
+    <div class="glass-card rounded-[--radius-xl] p-8">
+      <div class="text-center mb-8">
+        <h1 class="text-2xl font-bold text-text">Admin</h1>
+        <p class="text-text-muted text-sm mt-2">La Guita Grossa</p>
+      </div>
+
+      <form id="login-form" class="space-y-5">
+        <div>
+          <label for="email" class="block text-sm font-medium text-text mb-2">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            autocomplete="email"
+            class="w-full px-4 py-3 glass-input rounded-[--radius-md] text-text placeholder:text-text-muted/50 focus:outline-none focus:border-primary/40 transition-all"
+          />
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-text mb-2">Contrasenya</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            autocomplete="current-password"
+            class="w-full px-4 py-3 glass-input rounded-[--radius-md] text-text placeholder:text-text-muted/50 focus:outline-none focus:border-primary/40 transition-all"
+          />
+        </div>
+        <button type="submit" class="w-full glass-btn-primary px-6 py-3 text-text text-sm font-semibold tracking-[0.06em] uppercase rounded-full">
+          Entrar
+        </button>
+        <p id="error-msg" class="hidden text-primary text-sm text-center mt-3"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('login-form') as HTMLFormElement;
+    const errorMsg = document.getElementById('error-msg')!;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMsg.classList.add('hidden');
+
+      const email = (document.getElementById('email') as HTMLInputElement).value;
+      const password = (document.getElementById('password') as HTMLInputElement).value;
+
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (res.ok) {
+        window.location.href = '/admin/dashboard';
+      } else {
+        errorMsg.textContent = 'Credencials incorrectes';
+        errorMsg.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
