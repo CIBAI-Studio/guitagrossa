@@ -1,19 +1,36 @@
-import { createHash, timingSafeEqual } from 'node:crypto';
-import { config } from 'dotenv';
+import { createHash, randomBytes, timingSafeEqual } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
-config();
+interface AuthConfig {
+  email: string;
+  passwordHash: string;
+  salt: string;
+}
 
-function env(key: string): string {
-  return process.env[key] ?? '';
+let _auth: AuthConfig | null = null;
+function getAuth(): AuthConfig {
+  if (!_auth) {
+    const filepath = resolve(process.cwd(), 'data', 'auth.json');
+    _auth = JSON.parse(readFileSync(filepath, 'utf-8'));
+  }
+  return _auth!;
+}
+
+let _sessionSecret: string | null = null;
+function getSessionSecret(): string {
+  if (!_sessionSecret) {
+    _sessionSecret = process.env.SESSION_SECRET || randomBytes(32).toString('hex');
+  }
+  return _sessionSecret;
 }
 
 export function verifyPassword(email: string, password: string): boolean {
-  if (email !== env('ADMIN_EMAIL')) return false;
-  const attempt = createHash('sha256').update(password + env('ADMIN_SALT')).digest('hex');
-  const stored = env('ADMIN_PASSWORD_HASH');
-  if (!stored) return false;
+  const auth = getAuth();
+  if (email !== auth.email) return false;
+  const attempt = createHash('sha256').update(password + auth.salt).digest('hex');
   try {
-    return timingSafeEqual(Buffer.from(attempt), Buffer.from(stored));
+    return timingSafeEqual(Buffer.from(attempt), Buffer.from(auth.passwordHash));
   } catch {
     return false;
   }
@@ -21,19 +38,18 @@ export function verifyPassword(email: string, password: string): boolean {
 
 export function createSessionToken(): string {
   const payload = `session:${Date.now()}`;
-  const sig = createHash('sha256').update(payload + env('SESSION_SECRET')).digest('hex');
+  const sig = createHash('sha256').update(payload + getSessionSecret()).digest('hex');
   return `${Buffer.from(payload).toString('base64')}.${sig}`;
 }
 
 export function verifySessionToken(token: string): boolean {
-  const secret = env('SESSION_SECRET');
-  if (!token || !secret) return false;
+  if (!token) return false;
   const parts = token.split('.');
   if (parts.length !== 2) return false;
   const [payloadB64, sig] = parts;
   try {
     const payload = Buffer.from(payloadB64, 'base64').toString();
-    const expected = createHash('sha256').update(payload + secret).digest('hex');
+    const expected = createHash('sha256').update(payload + getSessionSecret()).digest('hex');
     return timingSafeEqual(Buffer.from(sig), Buffer.from(expected));
   } catch {
     return false;
