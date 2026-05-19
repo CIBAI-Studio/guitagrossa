@@ -1,34 +1,28 @@
 ---
-const currentPath = Astro.url.pathname;
-
 const links = [
-  { href: '/', label: 'Inici' },
-  { href: '/historia', label: 'Història' },
-  { href: '/integrants', label: 'Integrants' },
-  { href: '/contacte', label: 'Contacte' },
+  { href: '#inici', label: 'Inici' },
+  { href: '#historia', label: 'Història' },
+  { href: '#galeria', label: 'Galeria' },
+  { href: '#integrants', label: 'Integrants' },
+  { href: '#contacte', label: 'Contacte' },
 ];
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-[100] glass-nav" aria-label="Navegació principal">
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-[100] glass-nav" aria-label="Navegació principal">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
-      <a href="/" class="flex items-center gap-2">
+      <a href="#inici" class="flex items-center gap-2">
         <img src="/images/logo-guitagrossa.webp" alt="La Guita Grossa" class="h-8 w-auto" />
         <span class="text-lg font-bold text-text tracking-wide">La Guita Grossa</span>
       </a>
 
-      <ul class="hidden md:flex items-center gap-8" role="list">
+      <ul class="hidden md:flex items-center gap-1" role="list">
         {links.map(({ href, label }) => (
           <li>
             <a
               href={href}
-              class:list={[
-                'text-[0.9375rem] font-medium tracking-[0.08em] uppercase transition-colors duration-200',
-                currentPath === href || (href !== '/' && currentPath.startsWith(href))
-                  ? 'text-primary'
-                  : 'text-text hover:text-primary',
-              ]}
-              aria-current={currentPath === href ? 'page' : undefined}
+              class="nav-link px-4 py-2 rounded-[--radius-md] text-[0.8125rem] font-medium tracking-[0.06em] uppercase transition-all duration-200 text-text-muted hover:text-text hover:bg-white/8"
+              data-section={href.replace('#', '')}
             >
               {label}
             </a>
@@ -52,21 +46,16 @@ const links = [
 
   <div
     id="mobile-menu"
-    class="md:hidden overflow-hidden max-h-0 transition-[max-height] duration-300 ease-in-out"
+    class="md:hidden overflow-hidden max-h-0 transition-[max-height] duration-300 ease-in-out glass"
     aria-hidden="true"
   >
-    <ul class="px-4 pb-6 pt-2 space-y-4" role="list">
+    <ul class="px-4 pb-6 pt-2 space-y-1" role="list">
       {links.map(({ href, label }) => (
         <li>
           <a
             href={href}
-            class:list={[
-              'block text-[0.9375rem] font-medium tracking-[0.08em] uppercase',
-              currentPath === href || (href !== '/' && currentPath.startsWith(href))
-                ? 'text-primary'
-                : 'text-text-muted',
-            ]}
-            aria-current={currentPath === href ? 'page' : undefined}
+            class="mobile-nav-link block px-4 py-3 rounded-[--radius-md] text-[0.9375rem] font-medium tracking-[0.06em] uppercase text-text-muted hover:text-text hover:bg-white/8 transition-all"
+            data-section={href.replace('#', '')}
           >
             {label}
           </a>
@@ -91,9 +80,45 @@ const links = [
     toggle.setAttribute('aria-label', open ? 'Tancar menú' : 'Obrir menú');
     menu.setAttribute('aria-hidden', String(!open));
     menu.style.maxHeight = open ? `${menu.scrollHeight}px` : '0';
-
     bar1.style.transform = open ? 'rotate(45deg) translate(4px, 4px)' : '';
     bar2.style.opacity = open ? '0' : '1';
     bar3.style.transform = open ? 'rotate(-45deg) translate(4px, -4px)' : '';
   });
+
+  menu.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => {
+      open = false;
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+      menu.style.maxHeight = '0';
+      bar1.style.transform = '';
+      bar2.style.opacity = '1';
+      bar3.style.transform = '';
+    });
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            const section = link.getAttribute('data-section');
+            if (section === entry.target.id) {
+              link.classList.add('text-primary', '!text-primary');
+              link.classList.remove('text-text-muted');
+            } else {
+              link.classList.remove('text-primary', '!text-primary');
+              link.classList.add('text-text-muted');
+            }
+          });
+        }
+      });
+    },
+    { rootMargin: '-30% 0px -70% 0px' }
+  );
+
+  sections.forEach((s) => observer.observe(s));
 </script>

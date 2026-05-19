@@ -3,17 +3,17 @@
 
 <div
   id="music-player"
-  class="fixed bottom-6 right-6 z-[300] glass-crimson rounded-[--radius-lg] shadow-[--shadow-md] transition-all duration-300 w-16 hover:w-[280px] group overflow-hidden"
+  class="fixed bottom-6 right-6 z-[300] glass-crimson rounded-full shadow-[--shadow-md] transition-all duration-300"
 >
   <button
     id="music-toggle"
-    class="flex items-center gap-3 w-full px-4 py-4 text-text hover:text-primary transition-colors"
-    aria-label="Reproduir música"
+    class="flex items-center gap-3 px-5 py-3 text-text hover:text-primary transition-colors"
+    aria-label="Pausar música"
     type="button"
   >
     <svg
       id="icon-play"
-      class="w-5 h-5 shrink-0"
+      class="w-5 h-5 shrink-0 hidden"
       fill="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -22,7 +22,7 @@
     </svg>
     <svg
       id="icon-pause"
-      class="w-5 h-5 shrink-0 hidden"
+      class="w-5 h-5 shrink-0"
       fill="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -31,13 +31,13 @@
     </svg>
     <span
       id="music-label"
-      class="text-xs font-semibold tracking-[0.08em] uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      class="text-xs font-semibold tracking-[0.06em] uppercase whitespace-nowrap"
     >
-      Música ambiental
+      ♪ Reproduint
     </span>
   </button>
 
-  <audio id="audio-player" loop preload="none">
+  <audio id="audio-player" loop preload="auto">
     <source src="/audio/ambient.mp3" type="audio/mpeg" />
   </audio>
 </div>
@@ -51,20 +51,54 @@
 
   let playing = false;
 
-  toggle.addEventListener('click', () => {
-    if (playing) {
-      audio.pause();
-      iconPlay.classList.remove('hidden');
-      iconPause.classList.add('hidden');
-      label.textContent = 'Música ambiental';
-      toggle.setAttribute('aria-label', 'Reproduir música');
-    } else {
-      audio.play().catch(() => {});
+  function play() {
+    audio.play().then(() => {
+      playing = true;
       iconPlay.classList.add('hidden');
       iconPause.classList.remove('hidden');
-      label.textContent = 'Pausa';
+      label.textContent = '♪ Reproduint';
       toggle.setAttribute('aria-label', 'Pausar música');
+    }).catch(() => {});
+  }
+
+  function pause() {
+    audio.pause();
+    playing = false;
+    iconPlay.classList.remove('hidden');
+    iconPause.classList.add('hidden');
+    label.textContent = '♪ Reproduir';
+    toggle.setAttribute('aria-label', 'Reproduir música');
+  }
+
+  toggle.addEventListener('click', () => {
+    if (playing) {
+      pause();
+    } else {
+      play();
     }
-    playing = !playing;
+  });
+
+  // Autoplay on first user interaction
+  function autoplayOnInteraction() {
+    if (!playing) {
+      play();
+    }
+    document.removeEventListener('click', autoplayOnInteraction);
+    document.removeEventListener('scroll', autoplayOnInteraction);
+    document.removeEventListener('touchstart', autoplayOnInteraction);
+  }
+
+  // Try direct autoplay first
+  audio.volume = 0.4;
+  audio.play().then(() => {
+    playing = true;
+  }).catch(() => {
+    // Browser blocked autoplay — wait for first interaction
+    iconPlay.classList.remove('hidden');
+    iconPause.classList.add('hidden');
+    label.textContent = '♪ Reproduir';
+    document.addEventListener('click', autoplayOnInteraction, { once: true });
+    document.addEventListener('scroll', autoplayOnInteraction, { once: true });
+    document.addEventListener('touchstart', autoplayOnInteraction, { once: true });
   });
 </script>

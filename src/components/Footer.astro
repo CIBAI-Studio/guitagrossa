@@ -1,62 +1,20 @@
 ---
 const year = new Date().getFullYear();
-
-const links = [
-  { href: '/', label: 'Inici' },
-  { href: '/historia', label: 'Història' },
-  { href: '/integrants', label: 'Integrants' },
-  { href: '/contacte', label: 'Contacte' },
-];
 ---
 
-<footer class="bg-bg border-t border-border py-16">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-      <!-- Brand -->
-      <div>
-        <p class="text-xl font-bold text-text">La Guita Grossa</p>
-        <p class="text-sm text-text-muted mt-2">
-          Comparsa de La Patum de Berga.<br />
-          Patrimoni Immaterial de la Humanitat.
-        </p>
-      </div>
-
-      <!-- Nav -->
-      <div>
-        <p class="text-xs font-semibold tracking-[0.08em] uppercase text-text-muted mb-4">Seccions</p>
-        <ul class="space-y-2" role="list">
-          {links.map(({ href, label }) => (
-            <li>
-              <a
-                href={href}
-                class="text-sm text-text-muted hover:text-primary transition-colors"
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Credits -->
-      <div>
-        <p class="text-xs font-semibold tracking-[0.08em] uppercase text-text-muted mb-4">Crèdits</p>
-        <p class="text-sm text-text-muted">
-          Dissenyat amb <span class="text-primary" aria-label="amor">❤</span> per
-          <a
-            href="https://cibai.studio"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-text hover:text-primary transition-colors"
-          >
-            CIBAI Studio
-          </a>
-        </p>
-      </div>
-    </div>
-
-    <div class="mt-12 pt-8 border-t border-border text-center">
-      <p class="text-xs text-text-muted">&copy; {year} La Guita Grossa. Tots els drets reservats.</p>
-    </div>
+<footer class="relative bg-bg/80 backdrop-blur-sm border-t border-white/5 py-12">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-sm text-text-muted">
+      Dissenyat amb <span class="text-primary" aria-label="amor">❤</span> per
+      <a
+        href="https://cibai.studio"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-text hover:text-primary transition-colors"
+      >
+        CIBAI Studio
+      </a>
+    </p>
+    <p class="text-xs text-text-muted/60 mt-3">&copy; {year} La Guita Grossa. Tots els drets reservats.</p>
   </div>
 </footer>
